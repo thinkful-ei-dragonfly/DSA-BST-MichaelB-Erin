@@ -172,10 +172,10 @@ BST.insert(7,7)
 // console.log(findHeight([1,2,3,4,5]));
 
 let tree = new BinarySearchTree();
-tree.insert(3);
-tree.insert(2);
-tree.insert(4);
 tree.insert(1);
+tree.insert(2);
+tree.insert(3);
+tree.insert(4);
 tree.insert(5);
 
 function findHeight(tree){
@@ -199,4 +199,22 @@ function findHeight(tree){
   return count;
 }
 
-console.log(findHeight(tree));
+// console.log(findHeight(tree));
+
+function isBST(tree){
+  if(tree.left){
+    if(tree.left.key > tree.key){
+      return false;
+    }
+    return isBST(tree.left)
+  }
+  if(tree.right){
+    if(tree.right.key < tree.key){
+      return false;
+    }
+    return isBST(tree.right)
+  }
+  return true;
+}
+
+// console.log(isBST(tree));
