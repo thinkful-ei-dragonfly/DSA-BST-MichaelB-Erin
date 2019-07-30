@@ -139,11 +139,64 @@ BST.insert(7,7)
 
 // console.log(BST)
 
-function tree(t){
-  if(!t){
-      return 0;
+// function tree(t){
+//   if(!t){
+//       return 0;
+//   }
+//   return tree(t.left) + t.value + tree(t.right)
+// }
+
+// console.log(tree(BST))
+
+// input: [1,2,3,4,5]
+//output: 5
+
+//input: [3, 2 , 4, 1 , 5]
+//output: 3
+
+// function findHeight(tree){
+//   let counter = 0;
+//   // if(tree.key === null){
+//   //   return 0;
+//   // }
+//   if(tree.right === null && tree.left === null){
+    
+//   }
+
+//   find
+
+//   findHeight()
+
+// }
+
+// console.log(findHeight([1,2,3,4,5]));
+
+let tree = new BinarySearchTree();
+tree.insert(3);
+tree.insert(2);
+tree.insert(4);
+tree.insert(1);
+tree.insert(5);
+
+function findHeight(tree){
+  let count = 0;
+
+  if(tree.left){
+    let leftHeight = 1 + findHeight(tree.left);
+    if(leftHeight > count) {
+      count = leftHeight;
+    }
   }
-  return tree(t.left) + t.value + tree(t.right)
+   else if(tree.right){
+    let rightHeight = 1 + findHeight(tree.right);
+    if(rightHeight > count) {
+      count = rightHeight;
+    }
+  } else {
+    count = 1;
+  }
+
+  return count;
 }
 
-console.log(tree(BST))
+console.log(findHeight(tree));
