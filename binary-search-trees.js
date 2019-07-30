@@ -187,12 +187,12 @@ function findHeight(tree){
       count = leftHeight;
     }
   }
-   else if(tree.right){
+  if(tree.right){
     let rightHeight = 1 + findHeight(tree.right);
     if(rightHeight > count) {
       count = rightHeight;
     }
-  } else {
+  } if (!tree.left && !tree.right) {
     count = 1;
   }
 
@@ -219,9 +219,6 @@ function isBST(tree){
 
 // console.log(isBST(tree));
 
-// find far right value for highest
-// check to see if that value's 
-
 function findThirdLargest(t, result){
   // let max = t.key;
 
@@ -244,5 +241,29 @@ function findThirdLargest(t, result){
   
 }
 
-console.log(findThirdLargest(tree, {count: 0, thirdLargest: null}))
+// console.log(findThirdLargest(tree, {count: 0, thirdLargest: null}))
 
+function isBalanced(tree) {
+  if (!tree.left && !tree.right) {
+    return true
+  }
+
+  let left = findHeight(tree.left)
+  let right = findHeight(tree.right)
+  let diff = Math.abs(left - right)
+
+  if (diff <= 1 && isBalanced(tree.left) && isBalanced(tree.right)) {
+    return true
+  }
+
+  return false
+}
+
+let tree2 = new BinarySearchTree();
+tree2.insert(3);
+tree2.insert(4);
+tree2.insert(5);
+tree2.insert(6);
+tree2.insert(7);
+
+console.log(isBalanced(tree))
