@@ -172,11 +172,11 @@ BST.insert(7,7)
 // console.log(findHeight([1,2,3,4,5]));
 
 let tree = new BinarySearchTree();
-tree.insert(1);
-tree.insert(2);
-tree.insert(3);
-tree.insert(4);
 tree.insert(5);
+tree.insert(7);
+tree.insert(11);
+tree.insert(12);
+tree.insert(9);
 
 function findHeight(tree){
   let count = 0;
@@ -218,3 +218,31 @@ function isBST(tree){
 }
 
 // console.log(isBST(tree));
+
+// find far right value for highest
+// check to see if that value's 
+
+function findThirdLargest(t, result){
+  // let max = t.key;
+
+
+  if(t.right){
+    // max= t.right.key;
+     findThirdLargest(t.right, result);
+  }
+  // console.log(`max: ${result.thirdLargest}, count: ${result.count}`);
+  result.count ++;
+
+  if(result.count === 3){
+    result.thirdLargest = t.key;
+    // console.log(`max: ${result.thirdLargest}, count: ${result.count}`);
+    return result.thirdLargest;
+  }
+  if(t.left){
+     findThirdLargest(t.left, result)
+  }
+  
+}
+
+console.log(findThirdLargest(tree, {count: 0, thirdLargest: null}))
+
