@@ -114,14 +114,14 @@ class BinarySearchTree {
 
 let BST = new BinarySearchTree()
 
-BST.insert(3,3)
+BST.insert(3,1)
 BST.insert(1,1)
-BST.insert(4,4)
-BST.insert(6,6)
-BST.insert(9,9)
-BST.insert(2,2)
-BST.insert(5,5)
-BST.insert(7,7)
+BST.insert(4,1)
+BST.insert(6,1)
+BST.insert(9,1)
+BST.insert(2,1)
+BST.insert(5,1)
+BST.insert(7,1)
 
 // BST.insert('E')
 // BST.insert('A')
@@ -139,14 +139,14 @@ BST.insert(7,7)
 
 // console.log(BST)
 
-// function tree(t){
-//   if(!t){
-//       return 0;
-//   }
-//   return tree(t.left) + t.value + tree(t.right)
-// }
+function tree(t){
+  if(!t){
+      return 0;
+  }
+  return tree(t.left) + t.value + tree(t.right)
+}
 
-// console.log(tree(BST))
+console.log(tree(BST))
 
 // input: [1,2,3,4,5]
 //output: 5
@@ -171,12 +171,12 @@ BST.insert(7,7)
 
 // console.log(findHeight([1,2,3,4,5]));
 
-let tree = new BinarySearchTree();
-tree.insert(5);
-tree.insert(7);
-tree.insert(11);
-tree.insert(12);
-tree.insert(9);
+// let tree = new BinarySearchTree();
+// tree.insert(5);
+// tree.insert(7);
+// tree.insert(11);
+// tree.insert(12);
+// tree.insert(9);
 
 function findHeight(tree){
   let count = 0;
@@ -246,3 +246,48 @@ function findThirdLargest(t, result){
 
 console.log(findThirdLargest(tree, {count: 0, thirdLargest: null}))
 
+
+
+function isBalanced(tree) {
+  let balanced = true;
+  let leftHeight = findHeight(tree.left);
+  console.log(leftHeight);
+  let rightHeight = findHeight(tree.right);
+  console.log(rightHeight);
+  if (leftHeight - rightHeight > 1 || rightHeight - leftHeight > 1) {
+    balanced = false;
+    return balanced;
+  }
+  if (tree.left) {
+    console.log('lefttree');
+    balanced = isBalanced(tree.left);
+  }
+  if (tree.right) {
+    console.log('righttree');
+    balanced = isBalanced(tree.right);
+  }
+  return balanced;
+}
+
+const arrayTest = [3, 5, 4, 6, 1, 0, 2];
+let myArr2 = [3, 1, 5, 2, 4, 6, 0];
+
+function orderArr(arr) {
+  let higher = [];
+  let lower = [];
+  if (arr.length < 2) {
+    return arr;
+  }
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < arr[0]) {
+      lower.push(arr[i]);
+    } else {
+      higher.push(arr[i]);
+    }
+  }
+  return [arr[0], ...orderArr(lower), ...orderArr(higher)];
+}
+
+function testSame(arr1, arr2) {
+  return JSON.stringify(orderArr(arr1)) === JSON.stringify(orderArr(arr2));
+}
